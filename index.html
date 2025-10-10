@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CeasaConnect — Automação para Distribuidores</title>
+  <meta name="description" content="CeasaConnect — conecta distribuidores, compradores e transportadores via WhatsApp. Cotações diárias, pedidos automatizados e acionamento de transporte." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root{
+      --brand:#10b981; /* tom verde (whatsapp-like) */
+      --dark:#07203a;
+      --muted:#6b7280;
+      --bg:#ffffff;
+      --card:#ffffff;
+      --radius:14px;
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;margin:0;background:linear-gradient(180deg,#fbfdfb 0%, #ffffff 40%);color:var(--dark);-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+
+    /* Container */
+    .wrap{max-width:var(--container);margin:0 auto;padding:28px}
+
+    /* Header / Hero */
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:60px;height:60px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{font-weight:600;color:var(--muted);text-decoration:none}
+    .btn-outline{border:1px solid #e6eef6;padding:8px 12px;border-radius:10px}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center;padding:36px 0}
+    @media(max-width:980px){.hero{grid-template-columns:1fr;}.hero-right{order:-1}}
+    .hero h1{font-size:40px;margin:0 0 12px}
+    .hero p{color:var(--muted);line-height:1.6}
+    .hero-cta{margin-top:18px;display:flex;gap:12px}
+    .btn-primary{background:var(--brand);color:#fff;padding:12px 18px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    .btn-secondary{background:#fff;border:1px solid #e6eef6;padding:10px 16px;border-radius:10px}
+    .hero-right img{width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(2,6,23,0.06)}
+
+    /* Section cards alternating */
+    section.card{background:var(--card);border-radius:var(--radius);padding:26px;margin-bottom:22px;box-shadow:0 8px 30px rgba(2,6,23,0.04)}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+    @media(max-width:900px){.split{grid-template-columns:1fr}}
+    .split img{width:100%;border-radius:12px}
+    .icon{font-size:28px;color:var(--brand);margin-right:10px}
+
+    /* Features grid */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:980px){.features{grid-template-columns:1fr}}
+    .feature{padding:18px;border-radius:12px;background:#fafaf9;border:1px solid #f0f3f1;text-align:center}
+    .feature h4{margin:12px 0 6px}
+    .feature p{color:var(--muted);font-size:14px}
+
+    /* Pricing */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    @media(max-width:980px){.pricing-grid{grid-template-columns:1fr}}
+    .plan{background:#fff;padding:20px;border-radius:12px;border:1px solid #eef2f0;text-align:left}
+    .plan.featured{border:2px solid var(--brand);box-shadow:0 20px 40px rgba(16,185,129,0.07)}
+    .plan h3{margin:0}
+    .price{font-size:24px;font-weight:700;color:var(--dark);margin:12px 0}
+    .plan ul{color:var(--muted);line-height:1.6}
+    .plan .cta{margin-top:12px}
+
+    /* Contact form */
+    .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:20px}
+    @media(max-width:980px){.contact-grid{grid-template-columns:1fr}}
+    form{display:grid;gap:10px}
+    input,textarea,select{padding:12px;border-radius:10px;border:1px solid #e8ece8}
+    textarea{min-height:140px}
+    .form-actions{display:flex;gap:10px;align-items:center}
+
+    /* Footer */
+    footer{padding:28px 0;color:var(--muted);border-top:1px solid #f3f6f3;margin-top:30px}
+
+    /* Subtle helpers */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .kbd{background:#f5f7f5;border-radius:6px;padding:6px 8px;border:1px solid #eef2f0;font-weight:600}
+
+    /* small screens tweaks */
+    @media(max-width:520px){.hero h1{font-size:28px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">CC</div>
+        <div>
+          <div style="font-weight:700">CeasaConnect</div>
+          <div style="font-size:13px;color:var(--muted)">Automação para Distribuidores no CEASA</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Como Funciona</a>
+        <a href="#" onclick="document.getElementById('precos').scrollIntoView({behavior:'smooth'})">Preços</a>
+        <a href="#" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Contato</a>
+        <a class="btn-outline" href="#" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar Demo</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Conecte seu box ao mercado com automações via WhatsApp</h1>
+        <p class="muted">CeasaConnect automatiza cotações, pedidos e transporte entre distribuidores, compradores e transportadores — simples, rápido e sem instalação de apps.</p>
+
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar demonstração</button>
+          <button class="btn-secondary" onclick="document.getElementById('precos').scrollIntoView({behavior:'smooth'})">Ver planos</button>
+        </div>
+
+        <div style="margin-top:18px;display:flex;gap:10px;align-items:center">
+          <div class="kbd"><i class="fa-brands fa-whatsapp"></i> WhatsApp integrado</div>
+          <div class="muted" style="margin-left:10px">Suporta números dedicados</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="images/frutaslegumesum.jpg" alt="Ilustração WhatsApp e Ceasa" />
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="card">
+      <div class="split">
+        <div>
+          <h2>Como funciona</h2>
+          <p class="muted">Em três passos: você cadastra seus produtos e preços; o sistema envia cotações via WhatsApp; compradores respondem e os pedidos são confirmados automaticamente, acionando o transportador padrão.</p>
+
+          <div style="margin-top:18px" class="features">
+            <div class="feature">
+              <div><i class="fa-solid fa-tags" style="font-size:28px;color:var(--brand)"></i></div>
+              <h4>Cotações</h4>
+              <p>Envio automático de preços do dia para sua lista de compradores.</p>
+            </div>
+            <div class="feature">
+              <div><i class="fa-solid fa-cart-shopping" style="font-size:28px;color:var(--brand)"></i></div>
+              <h4>Pedidos</h4>
+              <p>Recebimento, parsing e registro de pedidos via WhatsApp.</p>
+            </div>
+            <div class="feature">
+              <div><i class="fa-solid fa-truck" style="font-size:28px;color:var(--brand)"></i></div>
+              <h4>Transporte</h4>
+              <p>Acionamento automático do carregador vinculado ao comprador.</p>
+            </div>
+          </div>
+
+        </div>
+        <div>
+          <img src="images/watsappdois.jpeg" alt="WhatsApp comunidades Ceasa" />
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGENS DE PRODUTOS (frutas,legumes) -->
+    <section class="card">
+      <h3 class="center">Produtos em destaque</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px">
+        <img src="images/frutasum.jpg" alt="frutas" style="width:100%;border-radius:10px;object-fit:cover;height:170px">
+        <img src="images/legumesum.png" alt="legumes" style="width:100%;border-radius:10px;object-fit:cover;height:170px">
+        <img src="images/verdurasum.jpg" alt="verduras" style="width:100%;border-radius:10px;object-fit:cover;height:170px">
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="precos" class="card">
+      <h2 style="margin:0 0 6px">Planos e Preços</h2>
+      <p class="muted">Planos simples para começar a automatizar suas operações hoje mesmo.</p>
+
+      <div class="pricing-grid" style="margin-top:18px">
+        <div class="plan">
+          <h3>Starter</h3>
+          <div class="price">R$ 99 / mês</div>
+          <ul>
+            <li>Envio de cotação diária</li>
+            <li>Registro de pedidos (planilha)</li>
+            <li>Suporte por e-mail</li>
+          </ul>
+          <div class="cta"><button class="btn-primary" onclick="selectPlan('Starter')">Contratar</button></div>
+        </div>
+
+        <div class="plan featured">
+          <h3>Pro</h3>
+          <div class="price">R$ 199 / mês</div>
+          <ul>
+            <li>Tudo do Starter</li>
+            <li>Acionamento automático de carregadores</li>
+            <li>Relatórios diários via WhatsApp</li>
+            <li>Suporte via WhatsApp</li>
+          </ul>
+          <div class="cta"><button class="btn-primary" onclick="selectPlan('Pro')">Contratar</button></div>
+        </div>
+
+        <div class="plan">
+          <h3>Enterprise</h3>
+          <div class="price">R$ 349 / mês</div>
+          <ul>
+            <li>Integração com ERP (Omie, Bling)</li>
+            <li>Dashboard web com KPIs</li>
+            <li>Onboarding dedicado</li>
+          </ul>
+          <div class="cta"><button class="btn-primary" onclick="selectPlan('Enterprise')">Contratar</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contato" class="card">
+      <h2>Fale conosco</h2>
+      <div class="contact-grid">
+        <div>
+          <p class="muted">Preencha o formulário e salvaremos sua mensagem localmente no navegador. Em demonstração, você pode visualizar as solicitações salvas.</p>
+          <div style="margin-top:12px">
+            <button class="btn-secondary" onclick="viewSubmissions()">Ver contatos salvos</button>
+            <span style="margin-left:10px;color:var(--muted)" id="submissionsCount">(0)</span>
+          </div>
+        </div>
+
+        <div>
+          <form id="contactForm">
+            <input type="text" id="nome" placeholder="Seu nome" required />
+            <input type="text" id="telefone" placeholder="Telefone / WhatsApp" />
+            <input type="email" id="email" placeholder="E-mail" />
+            <select id="planoSelect">
+              <option value="Starter">Starter — R$99</option>
+              <option value="Pro">Pro — R$199</option>
+              <option value="Enterprise">Enterprise — R$349</option>
+            </select>
+            <textarea id="mensagem" placeholder="Mensagem"></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Enviar</button>
+              <button type="button" class="btn-secondary" onclick="resetForm()">Limpar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="savedArea" style="display:none;margin-top:18px">
+        <h4>Contatos salvos (local)</h4>
+        <div id="savedList"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <div>
+          <div style="font-weight:700">CeasaConnect</div>
+          <div class="muted">Campinas, SP • Conectando distribuidores ao mercado</div>
+        </div>
+        <div class="muted">Siga-nos: <i class="fa-brands fa-facebook" style="margin-left:8px"></i> <i class="fa-brands fa-instagram" style="margin-left:8px"></i> <i class="fa-brands fa-youtube" style="margin-left:8px"></i></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Simple localStorage form saving
+    const FORM_KEY = 'ceasaconnect_contacts_v1';
+
+    function loadSubmissions(){
+      try{
+        const raw = localStorage.getItem(FORM_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch(e){
+        return [];
+      }
+    }
+
+    function saveSubmission(sub){
+      const arr = loadSubmissions();
+      arr.push(sub);
+      localStorage.setItem(FORM_KEY, JSON.stringify(arr));
+      updateCount();
+    }
+
+    function updateCount(){
+      const c = loadSubmissions().length;
+      document.getElementById('submissionsCount').textContent = `(${c})`;
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const nome = document.getElementById('nome').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const plano = document.getElementById('planoSelect').value;
+      const mensagem = document.getElementById('mensagem').value.trim();
+
+      if(!nome){
+        alert('Informe seu nome');
+        return;
+      }
+
+      const submission = { id: Date.now().toString(36), nome, telefone, email, plano, mensagem, data:new Date().toISOString() };
+      saveSubmission(submission);
+      alert('Contato salvo localmente. Em breve entraremos em contato.');
+      this.reset();
+    });
+
+    function resetForm(){
+      document.getElementById('contactForm').reset();
+    }
+
+    function viewSubmissions(){
+      const arr = loadSubmissions();
+      const container = document.getElementById('savedList');
+      const savedArea = document.getElementById('savedArea');
+      container.innerHTML = '';
+      if(arr.length===0){
+        container.innerHTML = '<div class="muted">Nenhum contato salvo localmente.</div>';
+        savedArea.style.display='block';
+        return;
+      }
+      arr.slice().reverse().forEach(s => {
+        const el = document.createElement('div');
+        el.style.padding='10px';
+        el.style.borderBottom='1px solid #f0f3f1';
+        el.innerHTML = `<strong>${escapeHtml(s.nome)}</strong> <span style="color:var(--muted)">(${s.plano})</span><div class="muted" style="font-size:13px">${escapeHtml(s.telefone || '')} ${escapeHtml(s.email || '')}</div><div style="margin-top:6px">${escapeHtml(s.mensagem || '')}</div><div class="muted" style="font-size:12px;margin-top:6px">${new Date(s.data).toLocaleString()}</div>`;
+        container.appendChild(el);
+      });
+      savedArea.style.display='block';
+    }
+
+    function escapeHtml(unsafe){
+      return unsafe
+           .replace(/&/g, "&amp;")
+           .replace(/</g, "&lt;")
+           .replace(/>/g, "&gt;")
+           .replace(/\"/g, "&quot;")
+           .replace(/'/g, "&#039;");
+    }
+
+    function selectPlan(plan){
+      document.getElementById('planoSelect').value = plan;
+      document.getElementById('contato').scrollIntoView({behavior:'smooth'});
+    }
+
+    // init
+    updateCount();
+  </script>
+</body>
+</html>
