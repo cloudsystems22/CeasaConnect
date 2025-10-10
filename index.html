@@ -87,6 +87,28 @@
     /* small screens tweaks */
     @media(max-width:520px){.hero h1{font-size:28px}}
   </style>
+  <style>
+    /* Mobile Menu Styles */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid #e6eef6;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; flex-direction: column; position: absolute; top: 95px; left: 28px; right: 28px; background: var(--card); padding: 14px; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(2,6,23,0.1); z-index: 1000; }
+      nav.active { display: flex; }
+      nav a { padding: 10px 0; }
+      .menu-toggle { display: block; }
+      .hero { text-align: center; }
+      .hero-cta { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -99,12 +121,17 @@
         </div>
       </div>
 
-      <nav>
+      <nav id="main-nav">
         <a href="#" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Como Funciona</a>
         <a href="#" onclick="document.getElementById('precos').scrollIntoView({behavior:'smooth'})">Preços</a>
         <a href="#" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Contato</a>
         <a class="btn-outline" href="#" onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Solicitar Demo</a>
       </nav>
+
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
     </header>
 
     <!-- HERO -->
@@ -342,6 +369,11 @@
     function selectPlan(plan){
       document.getElementById('planoSelect').value = plan;
       document.getElementById('contato').scrollIntoView({behavior:'smooth'});
+    }
+
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('active');
     }
 
     // init
