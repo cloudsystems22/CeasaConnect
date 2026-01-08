@@ -1,6 +1,6 @@
 # 🥬 CeasaConnect
 
-```
+
 [!Deploy Status](https://cloudsystems22.github.io/CeasaConnect/)
 [!License](./LICENSE)
 
