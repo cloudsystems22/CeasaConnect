@@ -1,66 +1,73 @@
-# 🥬 CeasaConnect
+# React + TypeScript + Vite
 
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-[!Deploy Status](https://cloudsystems22.github.io/CeasaConnect/)
-[!License](./LICENSE)
+Currently, two official plugins are available:
 
-> **Conectando produtores e compradores de forma ágil e eficiente.**
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-O **CeasaConnect** é uma plataforma web desenvolvida para facilitar a interação e o comércio dentro do cossistema da Ceasa. O objetivo é modernizar a consulta de preços, produtos e a logística entre os nvolvidos no abastecimento.
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## 🔗 Acesso ao Projeto
+## Expanding the ESLint configuration
 
-🚀 **Acesse a versão online aqui:**  
-https://cloudsystems22.github.io/CeasaConnect/
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
----
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-## 📱 Layout e Funcionalidades
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-O projeto conta com um design responsivo e intuitivo. Abaixo estão algumas prévias da aplicação:
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-<!-- 
-DICA: Para que as imagens apareçam, certifique-se de que você tem uma pasta 'assets' 
-com as imagens correspondentes ou altere os caminhos abaixo. 
--->
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### Página Inicial
-!Home do CeasaConnect
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-### Funcionalidades Principais
-*   **Consulta de Preços:** Visualização atualizada das cotações de frutas, legumes e verduras.
-*   **Catálogo de Produtores:** Lista de fornecedores e seus boxes.
-*   **Contato Direto:** Facilita a comunicação entre comprador e vendedor.
-*   **Responsividade:** Acesso otimizado via Desktop e Mobile.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-Este projeto foi desenvolvido utilizando as seguintes tecnologias:
-
-*   !HTML5 **HTML5** - Estruturação semântica.
-*   !CSS3 **CSS3** - Estilização e layout.
-*   !JavaScript **JavaScript** - Interatividade e lógica.
-
----
-
-## 🚀 Como Executar Localmente
-
-Caso queira rodar o projeto em sua máquina:
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/cloudsystems22/CeasaConnect.git
-    ```
-2.  **Acesse a pasta do projeto:**
-    ```bash
-    cd CeasaConnect
-    ```
-3.  **Abra o arquivo `index.html`** no seu navegador de preferência.
-
----
-
-Desenvolvido por Cloud Systems
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
