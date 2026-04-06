@@ -2,7 +2,11 @@
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 
-export default function Pricing({ onPlanSelect }) {
+interface PricingProps {
+  onPlanSelect: (plan: string) => void;
+}
+
+export default function Pricing({ onPlanSelect }: PricingProps) {
   return (
     <section id="precos" className="py-20 bg-white">
       <ScrollReveal className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

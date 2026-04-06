@@ -1,5 +1,4 @@
 // Aplicando as mudanças no arquivo ProductGrid.jsx
-import from 'react';
 import ScrollReveal from './ScrollReveal';
 
 export default function ProductGrid() {
