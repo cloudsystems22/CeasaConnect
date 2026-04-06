@@ -1,5 +1,3 @@
-// Aplicando as mudanças no arquivo Pricing.jsx
-import React from 'react';
 import ScrollReveal from './ScrollReveal';
 
 interface PricingProps {

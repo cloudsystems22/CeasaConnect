@@ -1,5 +1,5 @@
 // Aplicando as mudanças no arquivo Contact.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import ScrollReveal from './ScrollReveal';
 
 const FORM_KEY = 'ceasaconnect_contacts_v1';
@@ -38,12 +38,12 @@ export default function Contact({ selectedPlan }: ContactProps) {
     }
   }, [selectedPlan]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!formData.nome) { alert('Informe seu nome'); return; }
     const newSubmission = { id: Date.now().toString(36), ...formData, data: new Date().toISOString() };
@@ -131,7 +131,7 @@ export default function Contact({ selectedPlan }: ContactProps) {
                 <div>
                   <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700">Mensagem</label>
                   <textarea 
-                    name="mensagem" id="mensagem" rows="4" 
+                    name="mensagem" id="mensagem" rows={4} 
                     placeholder="Como podemos ajudar?"
                     value={formData.mensagem} onChange={handleInputChange}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand focus:ring-brand sm:text-sm p-3 border"

@@ -1,5 +1,4 @@
-// Aplicando as mudanças no arquivo Footer.jsx
-import React from 'react';
+import {} from 'react';
 
 export default function Footer() {
   return (
