@@ -7,7 +7,7 @@ export default function Navbar() {
     setIsOpen(!isOpen);
   };
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

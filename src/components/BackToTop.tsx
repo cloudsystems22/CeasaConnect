@@ -5,7 +5,7 @@ export default function BackToTop() {
 
   // Mostrar botão quando rolar para baixo mais de 300px
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
+    if (window.scrollY > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);

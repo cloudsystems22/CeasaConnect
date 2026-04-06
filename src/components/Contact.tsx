@@ -4,8 +4,22 @@ import ScrollReveal from './ScrollReveal';
 
 const FORM_KEY = 'ceasaconnect_contacts_v1';
 
-export default function Contact({ selectedPlan }) {
-  const [submissions, setSubmissions] = useState([]);
+interface ContactProps {
+  selectedPlan?: string;
+}
+
+interface Submission {
+  id: string;
+  nome: string;
+  telefone: string;
+  email: string;
+  plano: string;
+  mensagem: string;
+  data: string;
+}
+
+export default function Contact({ selectedPlan }: ContactProps) {
+  const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [showSaved, setShowSaved] = useState(false);
   const [formData, setFormData] = useState({
     nome: '', telefone: '', email: '', plano: 'Starter', mensagem: ''
@@ -24,12 +38,12 @@ export default function Contact({ selectedPlan }) {
     }
   }, [selectedPlan]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.nome) { alert('Informe seu nome'); return; }
     const newSubmission = { id: Date.now().toString(36), ...formData, data: new Date().toISOString() };
